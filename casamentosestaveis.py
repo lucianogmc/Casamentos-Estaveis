@@ -58,7 +58,7 @@ def converter(matriz):
 
 """
 A função 'aleatoria' recebe in inteiro positivo n e gera uma matriz de preferências
- aleatória (em formato lista de listas), ou seja, com 2n linhas e n colunas, 
+ aleatória, ou seja, com 2n linhas e n colunas, 
 cada linha uma permutação de 0, 1, ... , n - 1. Tal matriz é usada para testar 
 os algoritmos, e pode ser interpretada tanto como matriz padrão como também como 
 matriz convertida.
@@ -68,8 +68,10 @@ def aleatoria(n):
     import random
     l=range(2*n)
     for i in range(2*n):
-        l[i]=range(n)
+        l[i]=rangalee(n)
         random.shuffle(l[i])
+    import numpy
+    l = numpy.matrix(l)
     return l
 
 """

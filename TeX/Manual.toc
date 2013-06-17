@@ -1,7 +1,0 @@
-\contentsline {section}{\numberline {1}Resumo}{1}{section.1}
-\contentsline {section}{\numberline {2}O Problema dos Casamentos Est\IeC {\'a}veis}{1}{section.2}
-\contentsline {section}{\numberline {3}Determina\IeC {\c c}\IeC {\~a}o de um emparelhamento (casamento) est\IeC {\'a}vel}{2}{section.3}
-\contentsline {subsection}{\numberline {3.1}Crie listas numeradas de prefer\IeC {\^e}ncias para ambos os grupos}{2}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Crie um arquivo de texto que traduza as listas de prefer\IeC {\^e}ncias}{2}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Incicie uma sess\IeC {\~a}o de Python}{3}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Executar a fun\IeC {\c c}\IeC {\~a}o casarp}{3}{subsection.3.4}
