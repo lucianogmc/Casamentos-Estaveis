@@ -68,7 +68,7 @@ def aleatoria(n):
     import random
     l=range(2*n)
     for i in range(2*n):
-        l[i]=rangalee(n)
+        l[i]=range(n)
         random.shuffle(l[i])
     import numpy
     l = numpy.matrix(l)

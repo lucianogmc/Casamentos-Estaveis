@@ -1,0 +1,139 @@
+% Created 2013-06-17 Mon 00:35
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\title{Casamentos Estáveis - Algoritmos em Python}
+\author{Luciano Monteiro de Castro}
+\date{\today}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs Org-mode version 7.8.11}}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\vspace*{1cm}
+
+\section{Resumo}
+\label{sec-1}
+
+Este documento contém instruções para utilização dos algoritmos contidos no
+arquivo \verbatim{casamentosestaveis.py}, encapsulados no formato de funções. 
+O arquivo contém descrições das funções em si, de forma que nosso enfoque aqui
+será o de adotar o ponto de vista dos possíveis usuários destes algoritmos,
+de acordo com a natureza de seu interesse no problema dos casamentos estáveis.
+\section{O Problema dos Casamentos Estáveis}
+\label{sec-2}
+
+
+<Descrição do problema - copiar da wikipedia>
+\section{Determinação de um emparelhamento (casamento) estável}
+\label{sec-3}
+
+Se você deseja utilizar este pacote para resolver uma instância concreta do problema
+dos casamentos estáveis, mesmo que não tenha qualquer experiência em Python, 
+pode fazê-lo através das funções \verbatim{casar} ou 
+\verbatim{casarp}, dependendo do formato em que preferir obter a solução.
+Para isso, siga os seguintes passos:
+\subsection{Crie listas numeradas de preferências para ambos os grupos}
+\label{sec-3-1}
+
+Para facilitar, manteremos a convenção usual e chamaremos os membros de um grupo de
+``homens'' e os do outro grupo de ``mulheres''. Você deve numerar tanto os homens como
+as mulheres utilizando os números naturais de $0$ a $n-1$, onde $n$ representa a
+quantidade de pessoas em cada grupo. Depois, cada homem deve listar as mulheres em
+sua ordem de preferência, começando por sua preferida, e cada mulher deve fazer o
+mesmo para os homens. As mulheres e os homens nas listas devem ser representados pelos
+seus números. Dada a natureza do algoritmo usado na solução, o emparelhamento
+encontrado será o melhor possível para os homens, então você pode querer escolher
+como grupo dos homens o que mais lhe convier.
+
+\{\bf Exemplo:\} Homens: 0. André, 1. Bruno, 2. Carlos. Mulheres: 0. Ana, 1. Bianca,
+\begin{enumerate}
+\item Claudia. Se a ordem de preferências de André é Bianca, Claudia, Ana, então a sua
+\end{enumerate}
+lista será 1, 2, 0. Se a lista de Ana é 2, 1, 0, sua ordem de preferências é Carlos,
+Bruno, André.
+\subsection{Crie um arquivo de texto que traduza as listas de preferências}
+\label{sec-3-2}
+
+Esta etapa requer absoluta precisão. O arquivo de texto deve conter as $2n$ listas de
+preferências, começando pelos homens e depois pelas mulheres. Os números em uma mesma
+lista devem ser separados por espaços, e uma lista deve ser separada da outra por
+ponto e vírgula (;). O arquivo deve constituir-se de uma única linha de texto.
+
+\{\bf Exemplo:\} Com os homens e mulheres do exemplo anterior, a única linha
+de nosso arquivo de texto deve começar com a lista de André: \verbatim{1 2 0}. Deve
+seguir-se um ponto e vírgula e a lista de Bruno, e assim por diante. Ao final o
+conteúdo do arquivo será algo assim:
+
+\verbatim{1 2 0; 0 1 2; 1 0 2; 2 1 0; 0 1 2; 0 2 1}
+
+Observe que as $6$ listas de preferências são facilmente identificáveis, e estão
+na ordem André, Bruno, Carlos, Ana, Bianca, Claudia. Há um arquivo como este no
+repositório com o nome \verbatim{exemplo.cas}.
+\subsection{Incicie uma sessão de Python}
+\label{sec-3-3}
+
+Para isso você precisa instalar uma versão do Python em seu computador. Ver, 
+por exemplo, \verbatim{www.python.org}.
+\subsection{Executar a função \verbatim{casarp}}
+\label{sec-3-4}
+
+Esta função imprime diretamente na tela a lista dos pares de um emparelhamento
+estável, cada par contendo primeiro o número do homem, e depois o número da mulher.
+
+Para executá-la, digite primeiro
+
+\verbatim{>>> import casamentosestaveis as cas}
+
+seguido da tecla `enter'.
+
+(você precisa baixar o arquivo \verbatim{casamentosestaveis.py} contido neste
+repositório, e gravá-lo em uma pasta acessível ao Python, por exemplo raiz ou home).
+
+Depois execute a função \verbatim{casarp} sobre o arquivo contendo as listas de 
+preferências. Para isso digite
+
+\verbatim\{>>> cas.casarp(`nomedoarquivo')
+
+seguido de `enter'. Substitua ``nomedoarquivo'' pelo nome correto do arquivo, mas 
+não esqueça de fazê-lo entre \verbatim{'} e \verbatim{'}.
+
+\{\bf Exemplo:\} Continuando com o mesmo exemplo dos itens anteriores, eis o que
+executamos e obtemos:
+
+\verbatim{
+>>> import casamentosestaveis as cas
+import casamentosestaveis as cas
+>>> cas.casarp('exemplo.cas')
+cas.casarp('exemplo.cas')
+[0, 1]
+[1, 2]
+[2, 0]
+>>> 
+}
+
+Ou seja, o homem $0$, André, fica emparelhado com a mulher $1$, Bianca. Bruno fica
+com Claudia e Carlos, com Ana.
+
+\end{document}
