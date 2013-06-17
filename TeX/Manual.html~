@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Casamentos Estáveis - Algoritmos em Python</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="Casamentos Estáveis - Algoritmos em Python"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-06-17 00:29:20 BRT"/>
+<meta name="author" content="Luciano Monteiro de Castro"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Casamentos Estáveis - Algoritmos em Python</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Resumo</a></li>
+<li><a href="#sec-2">2 O Problema dos Casamentos Estáveis</a></li>
+<li><a href="#sec-3">3 Determinação de um emparelhamento (casamento) estável</a>
+<ul>
+<li><a href="#sec-3-1">3.1 Crie listas numeradas de preferências para ambos os grupos</a></li>
+<li><a href="#sec-3-2">3.2 Crie um arquivo de texto que traduza as listas de preferências</a></li>
+<li><a href="#sec-3-3">3.3 Incicie uma sessão de Python</a></li>
+<li><a href="#sec-3-4">3.4 Executar a função \verbatim{casarp}</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Resumo</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>Este documento contém instruções para utilização dos algoritmos contidos no
+arquivo \verbatim{casamentosestaveis.py}, encapsulados no formato de funções. 
+O arquivo contém descrições das funções em si, de forma que nosso enfoque aqui
+será o de adotar o ponto de vista dos possíveis usuários destes algoritmos,
+de acordo com a natureza de seu interesse no problema dos casamentos estáveis.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> O Problema dos Casamentos Estáveis</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+&lt;Descrição do problema - copiar da wikipedia&gt;
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Determinação de um emparelhamento (casamento) estável</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>Se você deseja utilizar este pacote para resolver uma instância concreta do problema
+dos casamentos estáveis, mesmo que não tenha qualquer experiência em Python, 
+pode fazê-lo através das funções \verbatim{casar} ou 
+\verbatim{casarp}, dependendo do formato em que preferir obter a solução.
+Para isso, siga os seguintes passos:
+</p>
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Crie listas numeradas de preferências para ambos os grupos</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>Para facilitar, manteremos a convenção usual e chamaremos os membros de um grupo de
+``homens" e os do outro grupo de ``mulheres". Você deve numerar tanto os homens como
+as mulheres utilizando os números naturais de \(0\) a \(n-1\), onde \(n\) representa a
+quantidade de pessoas em cada grupo. Depois, cada homem deve listar as mulheres em
+sua ordem de preferência, começando por sua preferida, e cada mulher deve fazer o
+mesmo para os homens. As mulheres e os homens nas listas devem ser representados pelos
+seus números. Dada a natureza do algoritmo usado na solução, o emparelhamento
+encontrado será o melhor possível para os homens, então você pode querer escolher
+como grupo dos homens o que mais lhe convier.
+</p>
+<p>
+{\bf Exemplo:} Homens: 0. André, 1. Bruno, 2. Carlos. Mulheres: 0. Ana, 1. Bianca,
+</p><ol>
+<li>Claudia. Se a ordem de preferências de André é Bianca, Claudia, Ana, então a sua
+</li>
+</ol>
+
+<p>lista será 1, 2, 0. Se a lista de Ana é 2, 1, 0, sua ordem de preferências é Carlos,
+Bruno, André.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Crie um arquivo de texto que traduza as listas de preferências</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<p>Esta etapa requer absoluta precisão. O arquivo de texto deve conter as \(2n\) listas de
+preferências, começando pelos homens e depois pelas mulheres. Os números em uma mesma
+lista devem ser separados por espaços, e uma lista deve ser separada da outra por
+ponto e vírgula (;). O arquivo deve constituir-se de uma única linha de texto.
+</p>
+<p>
+{\bf Exemplo:} Com os homens e mulheres do exemplo anterior, a única linha
+de nosso arquivo de texto deve começar com a lista de André: \verbatim{1 2 0}. Deve
+seguir-se um ponto e vírgula e a lista de Bruno, e assim por diante. Ao final o
+conteúdo do arquivo será algo assim:
+</p>
+<p>
+\verbatim{1 2 0; 0 1 2; 1 0 2; 2 1 0; 0 1 2; 0 2 1}
+</p>
+<p>
+Observe que as \(6\) listas de preferências são facilmente identificáveis, e estão
+na ordem André, Bruno, Carlos, Ana, Bianca, Claudia. Há um arquivo como este no
+repositório com o nome \verbatim{exemplo.cas}.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Incicie uma sessão de Python</h3>
+<div class="outline-text-3" id="text-3-3">
+
+<p>Para isso você precisa instalar uma versão do Python em seu computador. Ver, 
+por exemplo, \verbatim{www.python.org}.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Executar a função \verbatim{casarp}</h3>
+<div class="outline-text-3" id="text-3-4">
+
+<p>Esta função imprime diretamente na tela a lista dos pares de um emparelhamento
+estável, cada par contendo primeiro o número do homem, e depois o número da mulher.
+</p>
+<p>
+Para executá-la, digite primeiro
+</p>
+<p>
+\verbatim{&gt;&gt;&gt; import casamentosestaveis as cas}
+</p>
+<p>
+seguido da tecla 'enter'.
+</p>
+<p>
+(você precisa baixar o arquivo \verbatim{casamentosestaveis.py} contido neste
+repositório, e gravá-lo em uma pasta acessível ao Python, por exemplo raiz ou home).
+</p>
+<p>
+Depois execute a função \verbatim{casarp} sobre o arquivo contendo as listas de 
+preferências. Para isso digite
+</p>
+<p>
+\verbatim{&gt;&gt;&gt; cas.casarp('nomedoarquivo')
+</p>
+<p>
+seguido de 'enter'. Substitua ``nomedoarquivo" pelo nome correto do arquivo, mas 
+não esqueça de fazê-lo entre \verbatim{'} e \verbatim{'}.
+</p>
+<p>
+{\bf Exemplo:} Continuando com o mesmo exemplo dos itens anteriores, eis o que
+executamos e obtemos:
+</p>
+<p>
+\verbatim{
+&gt;&gt;&gt; import casamentosestaveis as cas
+import casamentosestaveis as cas
+&gt;&gt;&gt; cas.casarp('exemplo.cas')
+cas.casarp('exemplo.cas')
+[0, 1]
+[1, 2]
+[2, 0]
+&gt;&gt;&gt; 
+}
+</p>
+<p>
+Ou seja, o homem \(0\), André, fica emparelhado com a mulher \(1\), Bianca. Bruno fica
+com Claudia e Carlos, com Ana.
+</p></div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2013-06-17 00:29:20 BRT</p>
+<p class="author">Author: Luciano Monteiro de Castro</p>
+<p class="creator">Org version 7.8.11 with Emacs version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
