@@ -1,6 +1,8 @@
 #!/usr/bin/python 
 # -*- coding: latin-1 -*-
 import os, sys
+import numpy
+import random
 
 """
 A função 'ler' lê um arquivo de texto e o transforma em uma matriz do tipo 
@@ -14,20 +16,19 @@ a matriz identidade de ordem 2.
 """
 
 def ler(arquivo):
-    import numpy
     preferencias = open(arquivo, 'r')
     p = numpy.matrix(preferencias.read())
 
-    #Teste de Formato
+    # Teste de Formato
     [n,m]=p.shape
     if n==2*m:
-        #Teste da Soma
+        # Teste da Soma
         for i in range(n):
             if numpy.sum(p[i]) != m*(m-1)/2:
                 print 'Dados não compatíveis. Todas as linhas devem ser uma permutação de 0, 1, ..., n-1.'
                 break
        
-        #Teste Principal:    
+        # Teste Principal:    
         else:
              ref = range(n)
              for i in range(n):
@@ -48,7 +49,6 @@ uma matriz de preferências adequada ao código do algoritmo principal. Mais detal
 # vamos supor que a matriz já passou no teste.
 
 def converter(matriz):
-    import numpy
     [n,m] = matriz.shape
     A = numpy.copy(matriz)
     for i in range(m):
@@ -65,12 +65,10 @@ matriz convertida.
 """
 def aleatoria(n):
 # Gera matriz aleatoria:
-    import random
     l=range(2*n)
     for i in range(2*n):
         l[i]=range(n)
         random.shuffle(l[i])
-    import numpy
     l = numpy.matrix(l)
     return l
 
@@ -87,7 +85,6 @@ A função retorna o vetor (lista) h, tal que h[k] representa o número da mulher q
 será emparelhada com o homem k.
 """
 def casamentos(pref):
-    import numpy
     p = numpy.copy(pref)
     n = len(p)/2
     h = [-1]*n # armazena o par de cada homem, h[k] eh o numero da esposa do homem k (-1 significa sem par)
@@ -109,7 +106,7 @@ def casamentos(pref):
                             p[k,i] = -1 
                             break 
                         elif p[n+p[k,i], m[p[k,i]]] > p[n+p[k,i],k]: 
-    #se ela nao esta livre mas prefere o homem k a seu atual par, aceita a proposta.
+    # se ela nao esta livre mas prefere o homem k a seu atual par, aceita a proposta.
                             h[m[p[k,i]]] = -1
                             h[k]=p[k,i]
                             m[h[k]]=k
@@ -129,7 +126,6 @@ homens para definir a ordem em que propõem. Pode ser utilizada para observar que
 resultado obtido é sempre o mesmo.
 """
 def casamentos1(pref):
-    import numpy
     p = numpy.copy(pref)
     n = len(p)/2
     h = [-1]*n # armazena o par de cada homem, h[k] eh o numero da esposa do homem k (-1 significa sem par)
@@ -153,7 +149,7 @@ def casamentos1(pref):
                             p[k,i] = -1 
                             break 
                         elif p[n+p[k,i], m[p[k,i]]] > p[n+p[k,i],k]: 
-    #se ela nao esta livre mas prefere o homem k a seu atual par, aceita a proposta.
+    # se ela nao esta livre mas prefere o homem k a seu atual par, aceita a proposta.
                             h[m[p[k,i]]] = -1
                             h[k]=p[k,i]
                             m[h[k]]=k
@@ -176,7 +172,6 @@ homem i.
 """
 def estabilidade(h,pref):
 # Testa a estabilidade de um array de casamentos.
-    import numpy
     p = numpy.array(pref)
     n = len(h)
     m=[]
